@@ -10,12 +10,10 @@ import SwiftUI
 struct ContentView: View {
     
     @State var credits: Int = 0
-    @State var apple: Int = 0
-    @State var cherry: Int = 1
-    @State var star: Int = 2
+    @State var img1: String = "slot1"
+    @State var img2: String = "slot2"
+    @State var img3: String = "slot3"
 
-    
-    
     var body: some View {
         VStack {
             Spacer()
@@ -30,16 +28,16 @@ struct ContentView: View {
             Spacer()
             HStack{
                 Spacer()
-                Image("apple").resizable().scaledToFit()
+                Image(img1).resizable().scaledToFit()
                 Spacer()
-                Image("cherry").resizable().scaledToFit()
+                Image(img2).resizable().scaledToFit()
                 Spacer()
-                Image("star").resizable().scaledToFit()
+                Image(img3).resizable().scaledToFit()
                 Spacer()
             }
             Spacer()
             Button("Spin"){
-                
+                swapImages()
             }.font(.title)
                 .foregroundColor(Color.white)
                 .padding(.horizontal, 25.0)
@@ -50,6 +48,25 @@ struct ContentView: View {
             Spacer()
         }
        
+    }
+    
+    func swapImages() {
+        let rand1 = Int.random(in: 1...3)
+        let rand2 = Int.random(in: 1...3)
+        let rand3 = Int.random(in: 1...3)
+        
+        
+        img1 = "slot\(rand1)"
+        img2 = "slot\(rand2)"
+        img3 = "slot\(rand3)"
+        
+        if (img1 == img2 && img2 == img3) {
+            credits += 30
+        } else if(img1 == img2 || img1 == img3 || img2 == img3) {
+            credits += 15
+        }else {
+            credits -= 15
+        }
     }
 }
 
